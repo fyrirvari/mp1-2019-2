@@ -1,5 +1,4 @@
 ﻿#include <stdio.h>
-#include <math.h>
 #include <locale.h>
 
 //Плотности ДВП, ДСП и дерева (г/см^3).
@@ -64,8 +63,8 @@ void main()
 	m = (mBckWall + mWalls + mDoors + mCaps + mShelfs) / 1000;
 
 	printf("Выберите способ вывода:\n");
-	printf("1)В вещественных числах.\n");
-	printf("2)В целых числах.\n");
+	printf("1)Вещественное число.\n");
+	printf("2)Целое число.\n");
 	scanf_s("%d", &variable);
 	switch (variable)
 	{
