@@ -1,37 +1,73 @@
 ﻿#include <stdio.h>
+#include <math.h>
 #include <locale.h>
+
+//Плотности ДВП, ДСП и дерева (г/см^3).
+const double pDVP = 0.85;
+const double pDSP = 0.65;
+const double pWood = 0.64;
+
+double input(int lLim, int rLim, int k)
+{
+	double value;
+
+	do
+	{
+		switch (k)
+		{
+		case 1:
+			printf("Введите высоту от %d до %d см: ", lLim, rLim);
+			break;
+		case 2:
+			printf("Введите ширину от %d до %d см: ", lLim, rLim);
+			break;
+		case 3:
+			printf("Введите глубину от %d до %d см: ", lLim, rLim);
+			break;
+		}
+
+		scanf_s("%lf", &value);
+
+		if ((value < lLim) || (value > rLim))
+		{
+			printf("Не удововлетворяет условию.\n");
+		}
+	}
+	while ((value < lLim) || (value > rLim));
+
+	return value;
+}
 
 void main()
 {
 	setlocale(LC_ALL, "Rus");
 
-	double h, w, d, pDVP, pDSP, pWood, qt, mBckWall, mWalls, mDoors, mCaps, mShelfs, m, variable;
+	double h, w, d;
+	double  mBckWall, mWalls, mDoors, mCaps, mShelfs, m;
+	int qt, variable;
 
-	printf("Введите высоту(см), ширину(см), глубину(см): ");
-	scanf_s("%lf %lf %lf", &h, &w, &d);
-
-	//Плотности ДВП, ДСП и дерева ().
-	pDVP = 0.85;
-	pDSP = 0.65;
-	pWood = 0.64;
+	//Ввод высоты(см), ширины(см), глубины.
+	h = input(180, 220, 1);
+	w = input(80, 120, 2);
+	d = input(50, 90, 3);
 
 	//Количество полок внутри шкафа.
-	qt = (int)((h - 2 * 1.5) / 41.5);
+	qt = (int)((h - 3) / 41.5);
 
 	//Нахождение масс.
 	mBckWall = h * w  * 0.5 * pDVP;
 	mWalls = 2 * h * d * 1.5 * pDSP;
-	mDoors = 2 * h * w * 1 * pWood;
-	mCaps = 2 * w * d * 1.5 * pDSP;
-	mShelfs = (w - 1.5) * (d - 0.5) * qt * pDSP;
+	mDoors = h * w * 1 * pWood;
+	mCaps = 2 * (w - 3) * d * 1.5 * pDSP;
+	mShelfs = qt * (w - 3) * d * 1.5 * pDSP;
 
-	m = (mBckWall + mWalls + mDoors +mCaps + mShelfs) / 1000; 
+	m = (mBckWall + mWalls + mDoors + mCaps + mShelfs) / 1000;
 
 	printf("Выберите способ вывода:\n");
 	printf("1)В вещественных числах.\n");
 	printf("2)В целых числах.\n");
-	scanf_s("%lf", &variable);
-	switch ((int)variable)
+	scanf_s("%d", &variable);
+	switch (variable)
 	{
 	case 1:
 		printf("Масса шкафа равна: %lf (кг)\n", m);
