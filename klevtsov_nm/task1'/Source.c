@@ -48,30 +48,11 @@ int horse(char word1, char word2, int num1, int num2)
 }
 
 //Выводы на экран списка фигур способных попасть на данную клетку.
-void kingOut()
+void outPut(char figure[7])
 {
-	printf("В эту клетку может попасть Король.\n");
+	printf("В эту клетку может попасть %s.\n", figure);
 }
 
-void queenOut()
-{
-	printf("В эту клетку может попасть Ферзь.\n");
-}
-
-void rookOut()
-{
-	printf("В эту клетку может попасть Ладья.\n");
-}
-
-void phantOut()
-{
-	printf("В эту клетку может попасть Слон.\n");
-}
-
-void horseOut()
-{
-	printf("В эту клетку может попасть Конь.\n");
-}
 
 void main()
 {
@@ -120,14 +101,16 @@ void main()
 		else
 		{
 			printf("Король не может за один ход перейти из клетки %c%d в клетку %c%d.\n", word1, num1, word2, num2);
+			if (king(word1, word2, num1, num2))
+				outPut("Король");
 			if (queen(word1, word2, num1, num2))
-				queenOut();
+				outPut("Ферзь");
 			if (rook(word1, word2, num1, num2))
-				rookOut();
+				outPut("Ладья");
 			if (phant(word1, word2, num1, num2))
-				phantOut();
+				outPut("Слон");
 			if (horse(word1, word2, num1, num2))
-				horseOut();
+				outPut("Конь");
 		}
 		break;
 	case 2:
@@ -139,13 +122,15 @@ void main()
 		{
 			printf("Ферзь не может за один ход перейти из клетки %c%d в клетку %c%d.\n", word1, num1, word2, num2);
 			if (king(word1, word2, num1, num2))
-				kingOut();
+				outPut("Король");
+			if (queen(word1, word2, num1, num2))
+				outPut("Ферзь");
 			if (rook(word1, word2, num1, num2))
-				rookOut();
+				outPut("Ладья");
 			if (phant(word1, word2, num1, num2))
-				phantOut();
+				outPut("Слон");
 			if (horse(word1, word2, num1, num2))
-				horseOut();
+				outPut("Конь");
 		}
 		break;
 	case 3:
@@ -157,13 +142,15 @@ void main()
 		{
 			printf("Ладья не может за один ход перейти из клетки %c%d в клетку %c%d.\n", word1, num1, word2, num2);
 			if (king(word1, word2, num1, num2))
-				kingOut();
+				outPut("Король");
 			if (queen(word1, word2, num1, num2))
-				queenOut();
+				outPut("Ферзь");
+			if (rook(word1, word2, num1, num2))
+				outPut("Ладья");
 			if (phant(word1, word2, num1, num2))
-				phantOut();
+				outPut("Слон");
 			if (horse(word1, word2, num1, num2))
-				horseOut();
+				outPut("Конь");
 		}
 		break;
 	case 4:
@@ -175,13 +162,15 @@ void main()
 		{
 			printf("Слон не может за один ход перейти из клетки %c%d в клетку %c%d.\n", word1, num1, word2, num2);
 			if (king(word1, word2, num1, num2))
-				kingOut();
+				outPut("Король");
 			if (queen(word1, word2, num1, num2))
-				queenOut();
+				outPut("Ферзь");
 			if (rook(word1, word2, num1, num2))
-				rookOut();
+				outPut("Ладья");
+			if (phant(word1, word2, num1, num2))
+				outPut("Слон");
 			if (horse(word1, word2, num1, num2))
-				horseOut();
+				outPut("Конь");
 		}
 		break;
 	case 5:
@@ -193,13 +182,15 @@ void main()
 		{
 			printf("Конь не может за один ход перейти из клетки %c%d в клетку %c%d.\n", word1, num1, word2, num2);
 			if (king(word1, word2, num1, num2))
-				kingOut();
+				outPut("Король");
 			if (queen(word1, word2, num1, num2))
-				queenOut();
+				outPut("Ферзь");
 			if (rook(word1, word2, num1, num2))
-				rookOut();
+				outPut("Ладья");
 			if (phant(word1, word2, num1, num2))
-				phantOut();
+				outPut("Слон");
+			if (horse(word1, word2, num1, num2))
+				outPut("Конь");
 		}
 		break;
 	default:
