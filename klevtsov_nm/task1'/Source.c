@@ -6,12 +6,10 @@
 
 //Разность кодов символов и чисел.
 int difWord, difNum;
-char word1 , word2;
-int num1, num2;
 
 
 //Функции, позволяющие понять попадет ли фигура на данную клетку.
-int king()
+int king(char word1, char word2, int num1, int num2)
 {
 	if (((difWord == 1) && (difNum <= 1)) || ((difWord <= 1) && (difNum == 1)))
 		return 1;
@@ -19,7 +17,7 @@ int king()
 		return 0;
 }
 
-int queen()
+int queen(char word1, char word2, int num1, int num2)
 {
 	if ((word1 == word2) || (num1 == num2) || (difWord == difNum))
 		return 1;
@@ -27,7 +25,7 @@ int queen()
 		return 0;
 }
 
-int rook()
+int rook(char word1, char word2, int num1, int num2)
 {
 	if ((word1 == word2) || (num1 == num2))
 		return 1;
@@ -35,7 +33,7 @@ int rook()
 		return 0;
 }
 
-int phant()
+int phant(char word1, char word2, int num1, int num2)
 {
 	if (difWord == difNum)
 		return 1;
@@ -43,7 +41,7 @@ int phant()
 		return 0;
 }	
 
-int horse()
+int horse(char word1, char word2, int num1, int num2)
 {
 	if (((difWord == 1) && (difNum == 2)) || ((difWord == 2) && (difNum == 1)))
 		return 1;
@@ -60,7 +58,7 @@ void outPut(char figure[7])
 
 
 //Вывод на экран может или не может фигура попасть из клетки в клетку. 
-void canMoveOut(char figure[7], int var)
+void canMoveOut(char figure[7], char word1, char word2, int num1, int num2, int var)
 {
 	if (var == 1)
 	{
@@ -69,15 +67,15 @@ void canMoveOut(char figure[7], int var)
 	else
 	{
 		printf("%s не может за один ход перейти из клетки %c%d в клетку %c%d.\n", figure, word1, num1, word2, num2);
-		if (king())
+		if (king(word1, word2, num1, num2))
 			outPut("Король");
-		if (queen())
+		if (queen(word1, word2, num1, num2))
 			outPut("Ферзь");
-		if (rook())
+		if (rook(word1, word2, num1, num2))
 			outPut("Ладья");
-		if (phant())
+		if (phant(word1, word2, num1, num2))
 			outPut("Слон");
-		if (horse())
+		if (horse(word1, word2, num1, num2))
 			outPut("Конь");
 	}
 }
@@ -88,6 +86,8 @@ void main()
 	setlocale(LC_ALL, "Rus");
 
 	char K1[3], K2[3];
+	char word1, word2;
+	int num1, num2;
 	int variable;
 
 
@@ -123,34 +123,34 @@ void main()
 	switch (variable)
 	{
 	case 1:
-		if (king())
-			canMoveOut("Король", 1);
+		if (king(word1, word2, num1, num2))
+			canMoveOut("Король", word1, word2, num1, num2, 1);
 		else
-			canMoveOut("Король", 0);
+			canMoveOut("Король", word1, word2, num1, num2, 0);
 		break;
 	case 2:
-		if (queen())
-			canMoveOut("Ферзь", 1);
+		if (queen(word1, word2, num1, num2))
+			canMoveOut("Ферзь", word1, word2, num1, num2, 1);
 		else
-			canMoveOut("Ферзь", 0);
+			canMoveOut("Ферзь", word1, word2, num1, num2, 0);
 		break;
 	case 3:
-		if (rook())
-			canMoveOut("Ладья", 1);
+		if (rook(word1, word2, num1, num2))
+			canMoveOut("Ладья", word1, word2, num1, num2, 1);
 		else
-			canMoveOut("Ладья", 0);
+			canMoveOut("Ладья", word1, word2, num1, num2, 0);
 		break;
 	case 4:
-		if (phant())
-			canMoveOut("Слон", 1);
+		if (phant(word1, word2, num1, num2))
+			canMoveOut("Слон", word1, word2, num1, num2, 1);
 		else
-			canMoveOut("Слон", 0);
+			canMoveOut("Слон", word1, word2, num1, num2, 0);
 		break;
 	case 5:
-		if (horse())
-			canMoveOut("Конь", 1);
+		if (horse(word1, word2, num1, num2))
+			canMoveOut("Конь", word1, word2, num1, num2, 1);
 		else
-			canMoveOut("Конь", 0);
+			canMoveOut("Конь", word1, word2, num1, num2, 0);
 		break;
 	default:
 		printf("Не допустимое значения варианта.\n");
