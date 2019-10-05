@@ -1,15 +1,6 @@
 ﻿#include <stdio.h>
 #include <locale.h>
 
-char scroll()
-{
-	char c;
-
-	do { c = getchar(); } while ((c != ' ') && (c != '\t') && (c != '\n'));
-
-	return c;
-}
-
 int main()
 {
 	setlocale(LC_ALL, "Rus");
@@ -24,14 +15,17 @@ int main()
 
 	do
 	{
-		c = getchar();
+		do { c = getchar(); } while (c == ' ' || c == '\t');
+
+		if (c == '\n')
+			break;
 
 		if ((c >= '0') && (c <= '9'))
 			qtNums++;
 		else
 			qtWords++;
 
-		c = scroll();
+		do { c = getchar(); } while (c != ' ' && c != '\t' && c != '\n');
 
 	} while (c != '\n');
 
@@ -40,10 +34,9 @@ int main()
 	printf("Попробовать снова?\n");
 	printf("1)Да.\n");
 	printf("2)Нет.\n");
-	scanf_s("%d", &variable);
+	scanf_s("%d", &variable); getchar();
 	if (variable == 1)
 	{
-		getchar();
 		main();
 	}
 
