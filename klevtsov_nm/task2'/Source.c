@@ -1,15 +1,35 @@
 ﻿#include <stdio.h>
 #include <locale.h>
 
-int main()
+//Проверка символа на принадлежность к мн-ву чисел.
+int isDigit(char c)
 {
-	setlocale(LC_ALL, "Rus");
+	return (c >= '0' && c <= '9');
+}
+
+//Проверка символа на пренадлежность к алфавиту.
+int isWord(char c)
+{
+	//Русские символы кодируются 2мя байтами в UTF-8. Робить не так як треба.
+	return (/*(c >= 'А' && c <= 'я')*/c < 0 || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
+
+//Проверка символа на принадлежность к символам разделения.
+int isSeparation(char c)
+{
+	return (c != ' ' && c != '\t' && c != '\n');
+}
+
+void cnt()
+{
+	setlocale(LC_ALL, "Russian");
 
 	char c;
 	int qtWords, qtNums;
-	int variable;
 
-	qtWords = qtNums = 0;
+	int flag;
+
+	qtWords = qtNums = 0; 
 
 	printf("Введите строку, в которой требуется найти кол-во слов и чисел.\n");
 
@@ -17,28 +37,61 @@ int main()
 	{
 		do { c = getchar(); } while (c == ' ' || c == '\t');
 
+		//Существуют последовательность одиннаковых символов: flag = 1, иначе 0.
+		flag = 1;
+
 		if (c == '\n')
 			break;
 
-		if ((c >= '0') && (c <= '9'))
-			qtNums++;
-		else
-			qtWords++;
+		if (isDigit(c))
+		{
+			do
+			{
+				c = getchar();
+				if (!isDigit(c) && isSeparation(c))
+					flag = 0;
+			} while (isSeparation(c));
 
-		do { c = getchar(); } while (c != ' ' && c != '\t' && c != '\n');
+			if (flag)
+				qtNums++;
+		}
+		else if (isWord(c))
+		{
+			do
+			{
+				c = getchar();
+				if (!isWord(c) && isSeparation(c))
+					flag = 0;
+			} while (isSeparation(c));
+
+			if (flag)
+				qtWords++;
+		}
+		else
+			do { c = getchar(); } while (isSeparation(c));
 
 	} while (c != '\n');
 
 	printf("Количество слов: %d.\nКоличество чисел: %d.\n", qtWords, qtNums);
+}
 
-	printf("Попробовать снова?\n");
-	printf("1)Да.\n");
-	printf("2)Нет.\n");
-	scanf_s("%d", &variable); getchar();
-	if (variable == 1)
+
+int main()
+{
+	int variable;
+
+	cnt();
+
+	while (!0)
 	{
-		main();
+		printf("Попробовать снова?\n");
+		printf("1)Да.\n");
+		printf("2)Нет.\n");
+		scanf_s("%d", &variable); getchar();
+		if (variable == 1)
+			cnt();
+		else
+			break;
 	}
-
 	return 0;
 }
