@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 #include <locale.h>
 
-//Проверка символа на принадлежность к мн-ву чисел.
+//Проверка символа на принадлежность ко мн-ву чисел.
 int isDigit(char c)
 {
 	return (c >= '0' && c <= '9');
@@ -14,8 +14,8 @@ int isWord(char c)
 	return (/*(c >= 'А' && c <= 'я')*/c < 0 || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
 }
 
-//Проверка символа на принадлежность к символам разделения.
-int isSeparation(char c)
+//Проверка символа на не принадлежность к символам разделения.
+int isNotSeparation(char c)
 {
 	return (c != ' ' && c != '\t' && c != '\n');
 }
@@ -37,7 +37,7 @@ void cnt()
 	{
 		do { c = getchar(); } while (c == ' ' || c == '\t');
 
-		//Существуют последовательность одиннаковых символов: flag = 1, иначе 0.
+		//Существует последовательность одиннаковых символов: flag = 1, иначе 0.
 		flag = 1;
 
 		if (c == '\n')
@@ -48,9 +48,9 @@ void cnt()
 			do
 			{
 				c = getchar();
-				if (!isDigit(c) && isSeparation(c))
+				if (!isDigit(c) && isNotSeparation(c))
 					flag = 0;
-			} while (isSeparation(c));
+			} while (isNotSeparation(c));
 
 			if (flag)
 				qtNums++;
@@ -60,15 +60,15 @@ void cnt()
 			do
 			{
 				c = getchar();
-				if (!isWord(c) && isSeparation(c))
+				if (!isWord(c) && isNotSeparation(c))
 					flag = 0;
-			} while (isSeparation(c));
+			} while (isNotSeparation(c));
 
 			if (flag)
 				qtWords++;
 		}
 		else
-			do { c = getchar(); } while (isSeparation(c));
+			do { c = getchar(); } while (isNotSeparation(c));
 
 	} while (c != '\n');
 
