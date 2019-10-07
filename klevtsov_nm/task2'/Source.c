@@ -23,14 +23,10 @@ int isNotSeparation(char c)
 void cnt()
 {
 	setlocale(LC_ALL, "Russian");
-
 	char c;
 	int qtWords, qtNums;
-
 	int flag;
-
 	qtWords = qtNums = 0; 
-
 	printf("Введите строку, в которой требуется найти кол-во слов и чисел.\n");
 
 	do
@@ -39,7 +35,6 @@ void cnt()
 
 		//Существует последовательность одиннаковых символов: flag = 1, иначе 0.
 		flag = 1;
-
 		if (c == '\n')
 			break;
 
@@ -69,17 +64,13 @@ void cnt()
 		}
 		else
 			do { c = getchar(); } while (isNotSeparation(c));
-
 	} while (c != '\n');
-
 	printf("Количество слов: %d.\nКоличество чисел: %d.\n", qtWords, qtNums);
 }
-
 
 int main()
 {
 	int variable;
-
 	cnt();
 
 	while (!0)

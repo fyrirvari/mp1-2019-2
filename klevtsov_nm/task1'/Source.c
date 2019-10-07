@@ -3,10 +3,8 @@
 #include <string.h>
 #include <locale.h>
 
-
 //Разность кодов символов и чисел.
 int difWord, difNum;
-
 
 //Функции, позволяющие понять попадет ли фигура на данную клетку.
 int king(char word1, char word2, int num1, int num2)
@@ -49,13 +47,11 @@ int horse(char word1, char word2, int num1, int num2)
 		return 0;
 }
 
-
 //Выводы на экран списка фигур способных попасть на данную клетку.
 void outPut(char figure[7])
 {
 	printf("В эту клетку может попасть %s.\n", figure);
 }
-
 
 //Вывод на экран может или не может фигура попасть из клетки в клетку. 
 void canMoveOut(char figure[7], char word1, char word2, int num1, int num2, int var)
@@ -80,7 +76,6 @@ void canMoveOut(char figure[7], char word1, char word2, int num1, int num2, int 
 	}
 }
 
-
 void main()
 {
 	setlocale(LC_ALL, "Rus");
@@ -89,7 +84,6 @@ void main()
 	char word1, word2;
 	int num1, num2;
 	int variable;
-
 
 	//Ввод клеток.
 	do
@@ -110,7 +104,6 @@ void main()
 
 	difWord = fabs((int)(word1) - (int)(word2));
 	difNum = fabs(num1 - num2);
-
 
 	//Выбор фигуры, для которой мы будем узнавать, попадет ли она на клеткую, а если не попадет, то вывод списка фигур, которые могут попасть на эту клетку.
 	printf("Выберите фигуру:\n");
@@ -156,7 +149,6 @@ void main()
 		printf("Не допустимое значения варианта.\n");
 		break;
 	}
-
 
 	printf("Узнать для других фигур и клеток?\n");
 	printf("1)Да.\n");

@@ -6,38 +6,29 @@
 void userPcVersus()
 {
 	int userAlleged, userQt;
-
 	int pcGuessed, pcAlleged, pcQt;
 	int lLim, rLim;
 	char symb;
-
 	lLim = 1; rLim = 1000;
 	pcQt = userQt = 0;
-
 	pcGuessed = rand() % 1000 + 1;
 
 
 	//Инициализация локальной переменной "userAlleged".
 	printf("Введите число от 0 до 1000: ");
 	scanf_s("%d", &userAlleged);
-
 	if (userAlleged < pcGuessed)
 		printf("Загаданное число больше.\n");
 	else if (userAlleged > pcGuessed)
 		printf("Загаданное число меньше.\n");
 	else
 		printf("Вы угадали.\n");
-
 	userQt++;
-
 
 	//Инициализация локальной переменной "symb".
 	pcAlleged = (lLim + rLim) / 2;
-
 	printf("Это %d?(Введите, если загаданное больше: \">\", меньше: \"<\", равно: \"=\")\n", pcAlleged);
 	getchar(); scanf_s("%c", &symb);
-
-
 	if (symb == '>')
 	{
 		lLim = pcAlleged;
@@ -50,9 +41,7 @@ void userPcVersus()
 	{
 		printf("Число угаданно. ");
 	}
-
 	pcQt++;
-
 
 	while ((symb != '=') || (pcGuessed != userAlleged))
 	{
@@ -60,26 +49,19 @@ void userPcVersus()
 		{
 			printf("Введите число от 0 до 1000: ");
 			scanf_s("%d", &userAlleged);
-
 			if (userAlleged < pcGuessed)
 				printf("Загаданное число больше.\n");
 			else if (userAlleged > pcGuessed)
 				printf("Загаданное число меньше.\n");
 			else
 				printf("Вы угадали.\n");
-
 			userQt++;
 		}
-
-
 		if (symb != '=')
 		{
 			pcAlleged = (lLim + rLim) / 2;
-
 			printf("Это %d?(Введите, если загаданное больше: \">\", меньше: \"<\", равно: \"=\")\n", pcAlleged);
 			getchar(); scanf_s("%c", &symb);
-
-
 			if (symb == '>')
 			{
 				lLim = pcAlleged;
@@ -92,11 +74,9 @@ void userPcVersus()
 			{
 				printf("Число угаданно.\n");
 			}
-
 			pcQt++;
 		}
 	}
-
 
 	if (pcQt < userQt)
 		printf("Победил компьютер, угадав число за %d ход(а/ов).\n", pcQt);
@@ -111,25 +91,20 @@ void userGuesses()
 {
 	int  guessed, alleged, qt;
 	qt = 0;
-
 	guessed = rand() % 1000 + 1;
-
 
 	do
 	{
 		printf("Введите число от 0 до 1000: ");
 		scanf_s("%d", &alleged);
-
 		if (alleged < guessed)
 			printf("Загаданное число больше.\n");
 		else if (alleged > guessed)
 			printf("Загаданное число меньше.\n");
 		else
 			printf("Вы угадали.\n");
-
 		qt++;
 	} while (alleged != guessed);
-
 
 	printf("Количество попыток - %d.\n", qt);
 }
@@ -140,18 +115,14 @@ void computerGuesses()
 	int alleged, qt;
 	int lLim, rLim;
 	char symb;
-
 	lLim = 1; rLim = 1000;
 	qt = 0;
 
 	do
 	{
 		alleged = (lLim + rLim) / 2;
-
 		printf("Это %d?(Введите, если загаданное больше: \">\", меньше: \"<\", равно: \"=\")\n", alleged);
 		getchar(); scanf_s("%c", &symb);
-
-
 		if (symb == '>')
 		{
 			lLim = alleged;
@@ -164,7 +135,6 @@ void computerGuesses()
 		{
 			printf("Число угаданно. ");
 		}
-
 		qt++;
 	} while (symb != '=');
 
@@ -174,11 +144,8 @@ void computerGuesses()
 int main()
 {
 	setlocale(LC_ALL, "Rus");
-
-	int variable;
-	
 	srand(time(NULL));
-
+	int variable;
 
 	//Выбор режима программы "Угадай число".
 	printf("Выберите режим программы:\n");
@@ -187,8 +154,6 @@ int main()
 	printf("2)Режим №2 (пользователь загадывает число).\n");
 	printf("2)Режим №3 (кто быстрее пользователь или компьютер).\n");
 	scanf_s("%d", &variable);
-	
-
 	switch (variable)
 	{
 	case 0:
@@ -208,7 +173,6 @@ int main()
 		break;
 	} 
 
-
 	printf("Попробовать снова?\n");
 	printf("1)Да.\n");
 	printf("2)Нет.\n");
@@ -217,6 +181,5 @@ int main()
 	{
 		main();
 	}
-
 	return 0;
 }
