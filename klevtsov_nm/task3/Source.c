@@ -1,4 +1,4 @@
-#include <stdio.h>
+п»ї#include <stdio.h>
 #include <time.h>
 #include <locale.h>
 
@@ -8,13 +8,13 @@ void bulls_and_cows(int guessed, int n)
 
 	do
 	{
-		printf("Введите %d-значное число с неповторяющимися цифрами: ", n);
+		printf("Р’РІРµРґРёС‚Рµ %d-Р·РЅР°С‡РЅРѕРµ С‡РёСЃР»Рѕ СЃ РЅРµРїРѕРІС‚РѕСЂСЏСЋС‰РёРјРёСЃСЏ С†РёС„СЂР°РјРё: ", n);
 		scanf_s("%d", &alleged);
 		
-		//Сравнение n-ой цифры загаданного с n-ой цифрой предложенного.
+		//РЎСЂР°РІРЅРµРЅРёРµ n-РѕР№ С†РёС„СЂС‹ Р·Р°РіР°РґР°РЅРЅРѕРіРѕ СЃ n-РѕР№ С†РёС„СЂРѕР№ РїСЂРµРґР»РѕР¶РµРЅРЅРѕРіРѕ.
 	} while (guessed != alleged);
 
-	printf("Вы угадали!");
+	printf("Р’С‹ СѓРіР°РґР°Р»Рё!");
 }
 
 //Create number with length.
@@ -49,7 +49,7 @@ void length_5(int n)
 void set_length_for_BaC()
 {
 	int n;
-	printf("Выбирает длину загадываемого числа(от 2 до 5).\n 0)Выход.\n");
+	printf("Р’С‹Р±РёСЂР°РµС‚ РґР»РёРЅСѓ Р·Р°РіР°РґС‹РІР°РµРјРѕРіРѕ С‡РёСЃР»Р°(РѕС‚ 2 РґРѕ 5).\n 0)Р’С‹С…РѕРґ.\n");
 	scanf_s("%d", &n);
 
 	switch (n)
@@ -70,7 +70,7 @@ void set_length_for_BaC()
 		length_3(n);
 		break;
 	default:
-		printf("Недопустимые данные.\n");
+		printf("РќРµРґРѕРїСѓСЃС‚РёРјС‹Рµ РґР°РЅРЅС‹Рµ.\n");
 		break;
 	}
 }
@@ -83,9 +83,9 @@ int main()
 	
 	set_length_for_BaC();
 
-	printf("Попробовать снова?\n");
-	printf("1)Да.\n");
-	printf("2)Нет.\n");
+	printf("РџРѕРїСЂРѕР±РѕРІР°С‚СЊ СЃРЅРѕРІР°?\n");
+	printf("1)Р”Р°.\n");
+	printf("2)РќРµС‚.\n");
 	scanf_s("%d", &variable);
 	if (variable == 1)
 		set_length_for_BaC();
