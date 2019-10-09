@@ -1,73 +1,104 @@
 ﻿#include <stdio.h>
 #include <time.h>
 #include <locale.h>
+#define True 1
 
-void bulls_and_cows(int guessed, int n)
+//Получение цифры неповторяющейся с предыдущими.
+int get_element(int guessed[5], int n, int i)
 {
-	int alleged;
-
-	do
+	int digit, flag = 1;
+	while (flag)
 	{
+		digit = rand() % 10;
+		for (int j = 0; j < i; j++)
+		{
+			if (digit == guessed[j])
+			{
+				flag = 0;
+				break;
+			}
+		}
+		if (flag == 0)
+		{
+			flag = 1;
+			continue;
+		}
+		else
+			flag = 0;
+	}
+	return digit;
+}
+
+//Если имеются повторяющиеся элементы - "1", иначе - "0".
+int are_there_duplicates(int alleged[5], int n)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < i; j++)
+			if (alleged[i] == alleged[j])
+				return 1;
+	return 0;
+}
+
+void bulls_and_cows(int n)
+{
+	int alleged[5], guessed[5];
+	int entered, bulls, cows, cnt = 0;
+
+	//Компьютер "задумывает" n-значное число с неповторяющимися цифрами.
+	guessed[0] = rand() % 9 + 1;
+	for (int i = 1; i < n; ++i)
+	{
+		guessed[i] = get_element(guessed, n, i);
+	}
+
+	//Вычисление "коров" и "быков".
+	while (True)
+	{
+		cnt++;
+		bulls = cows = 0;
 		printf("Введите %d-значное число с неповторяющимися цифрами: ", n);
-		scanf_s("%d", &alleged);
+		scanf_s("%d", &entered);
+		for (int i = n - 1; i >= 0; i--)
+		{
+			alleged[i] = entered % 10;
+			entered = entered / 10;
+		}
+
+		if (are_there_duplicates(alleged, n))
+		{
+			printf("Введено число с повторяющимися цифрами!\n");
+			continue;
+		}
 		
-		//Сравнение n-ой цифры загаданного с n-ой цифрой предложенного.
-	} while (guessed != alleged);
-
-	printf("Вы угадали!");
+		for (int i = 0; i < n; i++)
+		{
+			if (alleged[i] == guessed[i])
+				bulls++;
+			else
+				for (int j = 0; j < n; j++)
+					if (alleged[i] == guessed[j])
+						cows++;
+		}
+		if (bulls == n)
+			break;
+		else
+			printf("Быков: %d.\nКоров: %d.\n", bulls, cows);
+	}
+	printf("Вы угадали за %d попыток! Моё уважение.\n", cnt);
 }
 
-//Create number with length.
-void length_2(int n)
-{
-	int guessed;
-	do { guessed = rand() % 90 + 10; } while (!(guessed / 10 != guessed % 10));
-	bulls_and_cows(guessed, n);
-}
-
-void length_3(int n)
-{
-	int guessed;
-	do { guessed = rand() % 900 + 100; } while (!(guessed / 100 != guessed % 10 != (guessed / 10) % 10));
-	bulls_and_cows(guessed, n);
-}
-
-void length_4(int n)
-{
-	int guessed;
-	do { guessed = rand() % 9000 + 1000; } while (!(guessed / 1000 != guessed % 10 != (guessed / 10) % 10 != (guessed / 100) % 10));
-	bulls_and_cows(guessed, n);
-}
-
-void length_5(int n)
-{
-	int guessed;
-	do { guessed = rand() % 90000 + 10000; } while (!(guessed / 10000 != guessed % 10 != (guessed / 10) % 10 != (guessed / 100) % 10 != (guessed / 1000) % 10));
-	bulls_and_cows(guessed, n);
-}
-
-void set_length_for_BaC()
+//Выбор длины загадываемого числа.
+void set_length()
 {
 	int n;
-	printf("Выбирает длину загадываемого числа(от 2 до 5).\n 0)Выход.\n");
+	printf("Выберите длину загадываемого числа(от 2 до 5), если же хотите выйти из программы введите \"0\": ");
 	scanf_s("%d", &n);
-
 	switch (n)
 	{
 	case 0:
 		exit();
-		break;
-	case 2:
-		length_2(n);
-		break;
-	case 3:
-		length_3(n);
-		break;
-	case 4:
-		length_3(n);
-		break;
-	case 5:
-		length_3(n);
+	case 2:case 3:case 4:case 5:
+		bulls_and_cows(n);
 		break;
 	default:
 		printf("Недопустимые данные.\n");
@@ -81,13 +112,18 @@ int main()
 	srand(time(NULL));
 	int variable;
 	
-	set_length_for_BaC();
+	set_length();
 
-	printf("Попробовать снова?\n");
-	printf("1)Да.\n");
-	printf("2)Нет.\n");
-	scanf_s("%d", &variable);
-	if (variable == 1)
-		set_length_for_BaC();
+	while (True)
+	{
+		printf("Попробовать снова?\n");
+		printf("1)Да.\n");
+		printf("2)Нет.\n");
+		scanf_s("%d", &variable);
+		if (variable == 1)
+			set_length();
+		else
+			break;
+	}
 	return 0;
 }
