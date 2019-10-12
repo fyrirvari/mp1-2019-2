@@ -3,8 +3,8 @@
 
 int main()
 {
-	int a, b;
-	scanf_s("%d %d", &a, &b);
-	printf("%d", m(a, b));
+	char str[4];
+	gets(str);
+	printf("%s", str);
 	return 0;
 }
