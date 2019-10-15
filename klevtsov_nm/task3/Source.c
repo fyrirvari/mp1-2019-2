@@ -6,7 +6,7 @@
 #define True 1
 
 //Получение цифры неповторяющейся с предыдущими.
-int get_element(int guessed[5], int n, int i)
+int get_element(int guessed[], int n, int i)
 {
 	int digit, flag = 1;
 	while (flag)
@@ -32,7 +32,7 @@ int get_element(int guessed[5], int n, int i)
 }
 
 //Если имеются повторяющиеся элементы - "1", иначе - "0".
-int are_there_duplicates(int alleged[5], int n)
+int are_there_duplicates(int alleged[], int n)
 {
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < i; j++)
@@ -41,13 +41,13 @@ int are_there_duplicates(int alleged[5], int n)
 	return 0;
 }
 
-//Проверка на принадлежность, состоящего из цифр от 1 до 9, множеству.
+//Проверка на принадлежность к, состоящему из цифр от 1 до 9, множеству.
 int is_digit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-//Проверка символа на пренадлежность к алфавиту.
+//Проверка символа на принадлежность к алфавиту.
 int is_word(char c)
 
 {
@@ -59,7 +59,7 @@ int get_entered(n)
 {
 	int result = 0, k = n;
 	char c[20];
-	int l_lim = 0, r_lim = 0; //Диапазон, в которых должно находится введенное число.
+	int l_lim = 0, r_lim = 0; //Диапазон, в котором должно находится введенное число.
 	gets(c);
 	if (is_digit(c[0])) //Проверка на цифру.
 	{
