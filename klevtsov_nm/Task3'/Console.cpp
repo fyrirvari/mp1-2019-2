@@ -15,8 +15,8 @@ enum TColor {
 	LIGHTMAGENTA, YELLOW, WHITE
 };
 
-const int window_width = 90;
-const int window_height = 30;
+const int window_width = 130;
+const int window_height = 50;
 const int COUNT = 16 * 16;
 SMALL_RECT window;
 COORD buf;
@@ -410,48 +410,360 @@ void output(int cnt)
 //Рисование голов быка и коровы ¯\_(ツ)_/¯.
 void output_bull_and_cow()
 {
-	char bull[] = "W#BBBBB#W#WB*B*BW###BBBBB####BYBYB#####YYY###";
-	char cow[] = "##Y###Y###WWWWWWW###W*W*W####WWPWW####WWPWW##";
-	for (int i = 0; i < 5; i++)
+	char bull[][24] = {
+		"####GG##########GG####",
+		"####GG##########GG####",
+		"##GG##############GG##",
+		"##GG##############GG##",
+		"##GG##############GG##",
+		"##GG##############GG##",
+		"####GG##########GG####",
+		"####GG##########GG####",
+		"####BBBBBBBBWWWWWW####",
+		"####BBBBBBBBWWWWWW####",
+		"BBBBBBBBBBBBBBBBWWBBBB",
+		"BBBBBBBBBBBBBBBBWWBBBB",
+		"##BBBBBB**BB**BBBBBB##",
+		"##BBBBBB**BB**BBBBBB##",
+		"####BBBB**BB**BBBB####",
+		"####BBBB**BB**BBBB####",
+		"####BBBBBBBBBBBBBB####",
+		"####BBBBBBBBBBBBBB####",
+		"######BBBBBBBBBB######",
+		"######BBBBBBBBBB######",
+		"########PPPPPP########",
+		"########P*PP*P########",
+		"########P*PP*P########",
+		"########PPPPPP########"
+	};
+	char cow[][24] = {
+		"######################",
+		"######################",
+		"######################",
+		"######################",
+		"##BB##############BB##",
+		"##BB##############BB##",
+		"####BB##########BB####",
+		"####BB##########BB####",
+		"####WWWWWWWWWWRRWW####",
+		"####WWWWWWWWWWRRWW####",
+		"WWWWWWWWWWWWRRYYRRWWWW",
+		"WWWWWWWWWWWWRRYYRRWWWW",
+		"##WWWWWWWWWWWWRRWWWW##",
+		"##WWWWWWWWWWWWRRWWWW##",
+		"####WWWW**WW**WWWW####",
+		"####WWWW**WW**WWWW####",
+		"####WWWWWWWWWWWWWW####",
+		"####WWWWWWWWWWWWWW####",
+		"######WWWWWWWWWW######",
+		"######WWWWWWWWWW######",
+		"########PPPPPP########",
+		"########P*PP*P########",
+		"########P*PP*P########",
+		"########PPPPPP########"
+	};
+	for (int i = 0; i < 24; i++)
 	{
-		for (int j = 0; j < 9; j++)
+		for (int j = 0; j < 22; j++)
 		{
-			gotoxy(window_width - 20 + j, 3 + i);
-			if (bull[i * 9 + j] == 'W')
-				textbackground(WHITE);
-			else if (bull[i * 9 + j] == 'B')
+			gotoxy(window_width - 50 + j, 3 + i);
+			if (bull[i][j] == 'G')
+				textbackground(DARKGRAY);
+			else if (bull[i][j] == 'B')
 				textbackground(BROWN);
-			else if (bull[i * 9 + j] == '*')
+			else if (bull[i][j] == '*')
 				textbackground(BLACK);
-			else if (bull[i * 9 + j] == 'Y')
+			else if (bull[i][j] == 'P')
+				textbackground(LIGHTMAGENTA);
+			else if (bull[i][j] == '#')
+				textbackground(BLACK);
+			else if (bull[i][j] == 'W')
+				textbackground(WHITE);
+			printf(" ");
+
+			gotoxy(window_width - 24 + j, 3 + i);
+			if (cow[i][j] == 'W')
+				textbackground(WHITE);
+			else if (cow[i][j] == 'P')
+				textbackground(LIGHTMAGENTA);
+			else if (cow[i][j] == '*')
+				textbackground(BLACK);
+			else if (cow[i][j] == 'Y')
 				textbackground(YELLOW);
-			else if (bull[i * 9 + j] == '#')
+			else if (cow[i][j] == '#')
 				textbackground(BLACK);
+			else if (cow[i][j] == 'R')
+				textbackground(RED);
+			else if (cow[i][j] == 'B')
+				textbackground(BROWN);
 			printf(" ");
 		}
 	}
-	for (int i = 0; i < 5; i++)
+	
+}
+
+void bac_nums(int bulls, int cows)
+{
+	char num0[][14] = {
+		"##**##",
+		"#****#",
+		"******",
+		"**##**",
+		"**##**",
+		"**##**",
+		"**##**",
+		"**##**",
+		"**##**",
+		"**##**",
+		"**##**",
+		"******",
+		"#****#",
+		"##**##"
+	};
+	char num1[][14] = {
+		"####**",
+		"###***",
+		"##****",
+		"#**#**",
+		"**##**",
+		"*###**",
+		"####**",
+		"####**",
+		"####**",
+		"####**",
+		"####**",
+		"####**",
+		"####**",
+		"####**"
+	};
+	char num2[][14] = {
+		"##**##",
+		"#****#",
+		"**##**",
+		"*###**",
+		"####**",
+		"####**",
+		"###**#",
+		"##**##",
+		"#**###",
+		"**####",
+		"**####",
+		"**####",
+		"******",
+		"******"
+	};
+	char num3[][14] = {
+		"##**##",
+		"#****#",
+		"**##**",
+		"*###**",
+		"####**",
+		"###**#",
+		"##**##",
+		"##**##",
+		"###**#",
+		"####**",
+		"*###**",
+		"**##**",
+		"#****#",
+		"##**##"
+	};
+	char num4[][14] = {
+		"####**",
+		"###***",
+		"##****",
+		"##****",
+		"##****",
+		"#**#**",
+		"**##**",
+		"**##**",
+		"******",
+		"******",
+		"####**",
+		"####**",
+		"####**",
+		"####**"
+	};
+	char num5[][14] = {
+		"******",
+		"******",
+		"**####",
+		"**####",
+		"**####",
+		"**####",
+		"****##",
+		"*****#",
+		"###***",
+		"####**",
+		"####**",
+		"**#***",
+		"*****#",
+		"#***##"
+	};
+	switch (bulls)
 	{
-		for (int j = 0; j < 9; j++)
+	case 0:
+		for (int i = 0; i < 14; i++)
 		{
-			gotoxy(window_width - 10 + j, 3 + i);
-			if (cow[i * 9 + j] == 'W')
-				textbackground(WHITE);
-			else if (cow[i * 9 + j] == 'P')
-				textbackground(LIGHTMAGENTA);
-			else if (cow[i * 9 + j] == '*')
-				textbackground(BLACK);
-			else if (cow[i * 9 + j] == 'Y')
-				textbackground(YELLOW);
-			else if (cow[i * 9 + j] == '#')
-				textbackground(BLACK);
-			printf(" ");
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 42 + j, 30 + i);
+				if (num0[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
 		}
+		break;
+	case 1:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 42 + j, 30 + i);
+				if (num1[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 2:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 42 + j, 30 + i);
+				if (num2[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 3:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 42 + j, 30 + i);
+				if (num3[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 4:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 42 + j, 30 + i);
+				if (num4[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	}
+	switch (cows)
+	{
+	case 0:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 16 + j, 30 + i);
+				if (num0[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 1:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 16 + j, 30 + i);
+				if (num1[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 2:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 16 + j, 30 + i);
+				if (num2[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 3:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 16 + j, 30 + i);
+				if (num3[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 4:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 16 + j, 30 + i);
+				if (num4[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
+	case 5:
+		for (int i = 0; i < 14; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				gotoxy(window_width - 16 + j, 30 + i);
+				if (num5[i][j] == '#')
+					textbackground(BLACK);
+				else
+					textbackground(WHITE);
+				printf(" ");
+			}
+		}
+		break;
 	}
 }
 
 //Рисование цифр ¯\_(ツ)_/¯.
-void output_pixes(int x, int y, int digit)
+void output_nums(int x, int y, int digit)
 {
 	char num[22];
 	switch (digit)
@@ -504,33 +816,53 @@ void output_pixes(int x, int y, int digit)
 //Название "Bulls and cows", не знаю зачем, но оченб захотелось ¯\_(ツ)_/¯.
 void output_title()
 {
-	char str[][20] = {
-		"__#______#_#_____",
-		"_#_#_____#_#_____",
-		"_#_#_____#_#_____",
-		"_##__#_#_#_#__#__",
-		"_#_#_#_#_#_#_#_#_",
-		"##_#_#_#_#_#_#___",
-		"_#_#_#_#_#_#__#_#",
-		"__#___#__#_#_#__#",
-		"________________#",
-		"______###_##___##",
-		"_____#__#_#_#_#_#",
-		"_____#__#_#_#_#_#",
-		"_____#_##_#_#_#_#",
-		"______#_#_#_#__#_",
-		"_________________",
-		"_#___#__#___#__#_",
-		"#_#_#_#_#___#_#_#",
-		"#___#_#_#_#_#_#__",
-		"#_#_#_#_#_#_#__#_",
-		"_#___#___#_#__#__"
+	char str[][40] = {
+		"____##____________##__##__________",
+		"____##____________##__##__________",
+		"__##__##__________##__##__________",
+		"__##__##__________##__##__________",
+		"__##__##__________##__##__________",
+		"__##__##__________##__##__________",
+		"__####____##__##__##__##____##____",
+		"__####____##__##__##__##____##____",
+		"__##__##__##__##__##__##__##__##__",
+		"__##__##__##__##__##__##__##__##__",
+		"####__##__##__##__##__##__##______",
+		"####__##__##__##__##__##__##______",
+		"__##__##__##__##__##__##____##__##",
+		"__##__##__##__##__##__##____##__##",
+		"____##______##____##__##__##____##",
+		"____##______##____##__##__##____##",
+		"________________________________##",
+		"________________________________##",
+		"____________######__####______####",
+		"____________######__####______####",
+		"__________##____##__##__##__##__##",
+		"__________##____##__##__##__##__##",
+		"__________##____##__##__##__##__##",
+		"__________##____##__##__##__##__##",
+		"__________##__####__##__##__##__##",
+		"__________##__####__##__##__##__##",
+		"____________##__##__##__##____##__",
+		"____________##__##__##__##____##__",
+		"__________________________________",
+		"__________________________________",
+		"__##______##____##______##____##__",
+		"__##______##____##______##____##__",
+		"##__##__##__##__##______##__##__##",
+		"##__##__##__##__##______##__##__##",
+		"##______##__##__##__##__##__##____",
+		"##______##__##__##__##__##__##____",
+		"##__##__##__##__##__##__##____##__",
+		"##__##__##__##__##__##__##____##__",
+		"__##______##______##__##____##____",
+		"__##______##______##__##____##____"
 	};
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 40; i++)
 	{
-		for (int j = 0; j < 17; j++)
+		for (int j = 0; j < 34; j++)
 		{
-			gotoxy(window_width - 30 + j, 3 + i);
+			gotoxy(window_width - 60 + j, 3 + i);
 			if (str[i][j] == '_')
 				textbackground(BLACK);
 			else
@@ -548,7 +880,7 @@ void bulls_and_cows(int n)
 	setwindow(window_width, window_height);
 	HideCursor();
 	int alleged[5], guessed[5];
-	int entered, bulls, cows, cnt = 0, flag = 1;
+	int entered, bulls, cows, cnt = 0, flag = 1, num, qt, last = 0, qty = 0, intermediate;
 
 	//Компьютер "задумывает" n-значное число с неповторяющимися цифрами.
 	guessed[0] = rand() % 9 + 1;
@@ -557,12 +889,31 @@ void bulls_and_cows(int n)
 		guessed[i] = get_element(guessed, n, i);
 	}
 	gotoxy(1, 1);
-	printf("Введите %d-значное число с неповторяющимися цифрами или \"stop\" для того, чтобы сдаться.", n);
+	printf("Введите %d-значное число с неповторяющимися цифрами", n);
+	gotoxy(1, 2);
+	printf("или \"stop\" для того, чтобы сдаться.");
 	output_bull_and_cow();
 	//Вычисление "коров" и "быков".
 	while (true)
 	{
 		GetWindow(&window, &buf);
+
+		textattr(LIGHTGRAY);
+		gotoxy(1, 11);
+		printf("Номер попытки:");
+		num = cnt + 1;
+		qt = 0;
+		while (num != 0)
+		{
+			num /= 10;
+			qt++;
+		}
+		num = cnt + 1;
+		for (int i = 0; i < qt; i++)
+		{
+			output_nums(1 + 4 * i, 13, int(num / pow(10, qt - i - 1)) % 10);
+		}
+
 		bulls = cows = 0;
 		clrpart(0, 3, 50, 7);
 		gotoxy(1, 3);
@@ -586,7 +937,7 @@ void bulls_and_cows(int n)
 			Sleep(1500);
 			continue;
 		}
-
+		intermediate = entered;
 		for (int i = n - 1; i >= 0; i--)
 		{
 			alleged[i] = entered % 10;
@@ -600,7 +951,7 @@ void bulls_and_cows(int n)
 			Sleep(1500);
 			continue;
 		}
-
+		cnt++;
 		for (int i = 0; i < n; i++)
 		{
 			if (alleged[i] == guessed[i])
@@ -614,17 +965,37 @@ void bulls_and_cows(int n)
 			break;
 		else
 		{
-			output_pixes(window_width - 17, 10, bulls);
-			output_pixes(window_width - 7, 10, cows);
+			bac_nums(bulls, cows);
 		}
-		cnt++;
-		gotoxy(1, 11);
+		gotoxy(1, 22);
 		textattr(LIGHTGRAY);
 		printf("Предыдущее число:");
 		for (int i = 0; i < n; i++)
 		{
-			output_pixes(1 + 4 * i, 13, alleged[i]);
+			output_nums(1 + 4 * i, 24, alleged[i]);
 		}
+
+		if (last == intermediate)
+			qty++;
+		else
+			qty = 0;
+		clrpart(0, 35, 50, 8);
+		textattr(LIGHTGRAY);
+		gotoxy(1, 33);
+		printf("Сколько раз последнее число повторялось:");
+		num = qty + 1;
+		qt = 0;
+		do
+		{
+			num /= 10;
+			qt++;
+		} while (num != 0);
+		num = qty;
+		for (int i = 0; i < qt; i++)
+		{
+			output_nums(1 + 4 * i, 35, int(num / pow(10, qt - i - 1)) % 10);
+		}
+		last = intermediate;
 	}
 	output(cnt);
 }
@@ -639,10 +1010,10 @@ void set_length()
 	output_title();
 
 	button button[4] = {
-		{"length = 2", false},
-		{"length = 3", false},
-		{"length = 4", false},
-		{"length = 5", false}
+		{"Длина = 2", false},
+		{"Длина = 3", false},
+		{"Длина = 4", false},
+		{"Длина = 5", false}
 	};
 	int n = sizeof(button) / sizeof(*button);
 	char c = 0;
@@ -707,8 +1078,8 @@ void menu()
 	output_title();
 
 	button button[2] = {
-		{"Start", false},
-		{"Exit", false}
+		{"Играть", false},
+		{"Выйти", false}
 	};
 	int n = sizeof(button) / sizeof(*button);
 	char c = 0;
@@ -773,8 +1144,8 @@ void menu()
 void last_screen()
 {
 	button button[2] = {
-		{"To try again", false},
-		{"Exit to menu", false}
+		{"Попробовать снова", false},
+		{"Выйти в меню", false}
 	};
 	int n = sizeof(button) / sizeof(*button);
 	char c = 0;
