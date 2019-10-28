@@ -1,0 +1,37 @@
+6624 68.99 milk "Prostokvashino" 3.4-4% 1l*
+2692 80.90 milk "Domik v derevne" 3.2% 1l*
+7806 75.99 milk "Prostokvashino" 4.5% 1l*
+6295 77.80 cheese "Lamber" 50% 0.9-1.15kg*
+4845 98.90 cheese "Almette" 60% 150g*
+3937 58.90 sour cream "Domik v derevne" 10% 300g*
+6432 83.90 sour cream "Prostokvashino" 20% 315g*
+6448 72.10 chocolate "Alpen Gold" 90g*
+9800 98.90 chocolate "Milka" 100g*
+4270 43.00 eggs "Seimovskie" 10p*
+5365 99.99 sunflower oil "Zolotaya Semechka" 1l*
+1007 165.99 chicken breast "Kurinoe zarstvo" 1kg#
+7475 165.99 chicken legs "Kurinoe zarstvo" 1kg#
+7094 279.80 pork dumplings "Boolmeni" 900g*
+4116 419.99 dumplings "Zezar classic" 800g*
+5338 249.99 sausage "Borodinskaya" 300g*
+9100 129.99 sausage "Doktorsakaya" 500g*
+7124 109.90 sprats in oil "Znak kachestva" 160g*
+2534 26.70 gum "Orbit" 13.6g*
+9894 28.90 gum "Dirol" 14g*
+7878 389.99 coffee "Jacobs Monarch" 150g*
+8322 229.90 coffee "Nescafe Classic" 130g*
+2337 94.99 tea "Richard Royal" 25x1.5-2g*
+5764 189.99 tea "Greenfield Golden Ceylon Black" 200g*
+1175 125.99 drink "Lipton Ice Tea" 1.5l*
+2547 125.99 drink "Pepsi/Pepsi Max" 2l*
+4512 139.90 juice "J-7" 0.97l*
+1827 46.99 water "Kislovodskaya" 1l*
+9825 69.99 beer "Velkopopovicky Kozel" 4.7% 0.45l*
+9670 65.00 cider "Mr. Craft" 4.7% 0.45l*
+4205 389.99 wine "Kaberne Massandra" 0.75l*
+7265 1904.00 whiskey "Jim Beam Red Stag" 40% 0.7l*
+2945 21.99 onion 1kg#
+7395 99.98 potatoes 2.5kg#
+1427 118.99 lemons 1kg#
+4574 79.99 apples 1kg#
+2939 69.90 tangerines 1kg#
