@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 #include <vector>
 #include "..\Console.cpp"
 
@@ -109,7 +110,7 @@ void createCheck(std::vector<Product> check)
 	printf("=%.2lf", sum);
 	gotoxy(90, 5 + i + 3);
 	printf("Thank you for your purchase!");
-	_getch();
+	_getch(); _getch();
 }
 
 //---------------------------------------------------------------------------
@@ -274,6 +275,7 @@ int main(void)
 	GetWindow(&window, &buf);
 	setWindowWidthHeight(buf.X, buf.Y);
 	HideCursor();
+	srand(time(NULL));
 	menu();
 
 	return 0;
