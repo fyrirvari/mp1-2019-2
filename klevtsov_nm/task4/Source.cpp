@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include <vector>
+#include <math.h>
 #include "..\Console.cpp"
 
 struct Product
@@ -15,18 +15,48 @@ struct Product
 	double qty;
 };
 
-int findEl(std::vector<Product> list, int wanted)
+class vector
+{
+private:
+	int size_;
+public:
+	Product arr[50];
+	vector()
+	{
+		size_ = 0;
+	}
+
+	void push_back(Product product)
+	{
+		arr[size_++] = product;
+	}
+
+	int size()
+	{
+		return size_;
+	}
+
+	bool empty()
+	{
+		if (size_ == 0)
+			return true;
+		else
+			return false;
+	}
+};
+
+int findEl(vector list, int wanted)
 {
 	int num;
 	for (num = 0; num < list.size(); num++)
 	{
-		if (list[num].barcode == wanted)
+		if (list.arr[num].barcode == wanted)
 			return num;
 	}
 	return -1;
 }
 
-std::vector<Product> products;
+vector products;
 void createProductsList(void)
 {
 	FILE *productsList;
@@ -64,15 +94,15 @@ void showProductList(int x, int y)
 	textattr(WHITE | BLACK);
 	clrscr();
 	int strNum = 0;
-	for each(Product product in products)
+	for(int i = 0; i < products.size(); i++)
 	{
 		gotoxy(x, y + strNum);
-		printf("%d\t%.2lf\t%s\n", product.barcode, product.price, product.title);
+		printf("%d\t%.2lf\t%s\n", products.arr[i].barcode, products.arr[i].price, products.arr[i].title);
 		strNum++;
 	}
 }
 
-void createCheck(std::vector<Product> check)
+void createCheck(vector check)
 {
 	textbackground(WHITE);
 	textcolor(BLACK);
@@ -88,19 +118,19 @@ void createCheck(std::vector<Product> check)
 	for (i = 0; i < check.size(); i++)
 	{
 		gotoxy(1, 5 + i);
-		printf("%s", check[i].title);
+		printf("%s", check.arr[i].title);
 		gotoxy(70, 5 + i);
-		printf("%.2lfx", check[i].price);
-		if (check[i].point == '*')
-			printf("%.0lf", check[i].qty);
+		printf("%.2lfx", check.arr[i].price);
+		if (check.arr[i].point == '*')
+			printf("%.0lf", check.arr[i].qty);
 		else
-			printf("%.3lf", check[i].qty);
+			printf("%.3lf", check.arr[i].qty);
 		gotoxy(140, 5 + i);
 		discount = (rand() % 11) * 5;
 		printf("%.0lf%%", discount);
 		gotoxy(window_width - 10, 5 + i);
-		printf("=%.2lf", check[i].price * check[i].qty * (1 - discount / 100.0));
-		sum += check[i].price * check[i].qty * (1 - discount / 100.0);
+		printf("=%.2lf", check.arr[i].price * check.arr[i].qty * (1 - discount / 100.0));
+		sum += check.arr[i].price * check.arr[i].qty * (1 - discount / 100.0);
 	}
 	gotoxy(window_width - 14, 5 + i);
 	printf("_____________", sum);
@@ -151,7 +181,7 @@ void purchaseMenu(void)
 {
 	textattr(WHITE | BLACK);
 	clrscr();
-	std::vector<Product> check;
+	vector check;
 	showProductList(80, 1); //Только ради облегчения ввода штриховых кодов.¯\_(ツ)_/¯
 	while (true)
 	{
@@ -188,11 +218,11 @@ void purchaseMenu(void)
 			else
 			{
 				gotoxy(1, 4);
-				printf("Price: %.2lf", products[num].price);
+				printf("Price: %.2lf", products.arr[num].price);
 				gotoxy(1, 5);
-				printf("Name: %s", products[num].title);
+				printf("Name: %s", products.arr[num].title);
 
-				Product product = products[num];
+				Product product = products.arr[num];
 				if (product.point == '*')
 					product.qty = 1;
 				else
@@ -208,12 +238,12 @@ void purchaseMenu(void)
 		else
 		{
 			gotoxy(1, 4);
-			printf("Price: %.2lf", check[num].price);
+			printf("Price: %.2lf", check.arr[num].price);
 			gotoxy(1, 5);
-			printf("Name: %s", check[num].title);
+			printf("Name: %s", check.arr[num].title);
 
-			if (check[num].point == '*')
-				check[num].qty++;
+			if (check.arr[num].point == '*')
+				check.arr[num].qty++;
 			else
 			{
 				double mass;
@@ -221,7 +251,7 @@ void purchaseMenu(void)
 				printf("Enter mass (kg)");
 				gotoxy(1, 8);
 				scanf_s("%lf", &mass); getchar();
-				check[num].qty += mass;
+				check.arr[num].qty += mass;
 			}
 		}
 		Sleep(2000);
@@ -243,7 +273,7 @@ void menu(void)
 	int n = sizeof(button) / sizeof(*button);
 	int id;
 	id = clickListener(button, n);
-	
+
 	switch (id)
 	{
 	case 0:
@@ -270,7 +300,7 @@ int main(void)
 		system("pause");
 		exit(NULL);
 	}
-	
+
 	setFull();
 	GetWindow(&window, &buf);
 	setWindowWidthHeight(buf.X, buf.Y);
