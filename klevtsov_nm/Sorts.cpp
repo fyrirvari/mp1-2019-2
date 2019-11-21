@@ -1,10 +1,17 @@
+#include <stdio.h>  
+#include <stdlib.h>  
+#include <io.h> 
+#include <time.h>  
+#include <string.h>
+
 struct File
 {
 	struct _finddata_t file;
 	char buffer[30];
 };
 
-void shakerSort(struct File files[], int n)
+//----------------------------------------------------------------------------
+void shakerSort(struct File *files, long n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -21,7 +28,7 @@ void shakerSort(struct File files[], int n)
 }
 
 //----------------------------------------------------------------------------
-void selectSort(struct File files[], int n)
+void selectSort(struct File *files, long n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -41,7 +48,7 @@ void selectSort(struct File files[], int n)
 }
 
 //----------------------------------------------------------------------------
-void insertSort(struct File files[], int n)
+void insertSort(struct File *files, long n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -54,7 +61,7 @@ void insertSort(struct File files[], int n)
 }
 
 //----------------------------------------------------------------------------
-void merge(struct File files[], long lb, long split, long ub)
+void merge(struct File *files, long lb, long split, long ub)
 {
 	long pos1 = lb;
 	long pos2 = split + 1;
@@ -79,7 +86,7 @@ void merge(struct File files[], long lb, long split, long ub)
 	free(temp);
 }
 
-void mergeSort(struct File files[], long lb, long ub)
+void mergeSort(struct File *files, long lb, long ub)
 {
 	long split;
 	if (lb < ub)
@@ -91,18 +98,18 @@ void mergeSort(struct File files[], long lb, long ub)
 	}
 }
 
-void mergeSort(struct File files[], int n)
+void mergeSort(struct File *files, long n)
 {
 	mergeSort(files, 0, n - 1);
 }
 
 //----------------------------------------------------------------------------
-void quickSort(struct File files[], int n)
+void quickSort(struct File *files, long n)
 {
 	long i = 0, j = n - 1;
 	File temp;
-	long p;
-	p = files[n >> 1].file.size;
+
+	_fsize_t p = files[n >> 1].file.size;
 
 	do {
 		while (files[i].file.size < p) i++;
@@ -119,7 +126,7 @@ void quickSort(struct File files[], int n)
 }
 
 //----------------------------------------------------------------------------
-int increment(long inc[], long size) {
+int increment(long *inc, long size) {
 	int p1, p2, p3, s;
 
 	p1 = p2 = p3 = 1;
@@ -139,7 +146,7 @@ int increment(long inc[], long size) {
 	return s > 0 ? --s : 0;
 }
 
-void shellSort(struct File files[], int n)
+void shellSort(struct File *files, long n)
 {
 	long inc, i, j, seq[40];
 	int s;
@@ -159,7 +166,7 @@ void shellSort(struct File files[], int n)
 }
 
 //----------------------------------------------------------------------------
-void countingSort(struct File files[], int n)
+void countingSort(struct File *files, long n)
 {
 	unsigned long max = files[0].file.size;
 	for (int i = 1; i < n; i++)
@@ -196,8 +203,9 @@ void countingSort(struct File files[], int n)
 	}
 	free(c);
 }
+
 //----------------------------------------------------------------------------
-void reverse(struct File files[], int n)
+void reverse(struct File *files, long n)
 {
 	for (int i = 0; i < n >> 1; i++)
 	{

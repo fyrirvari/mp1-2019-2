@@ -1,17 +1,11 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h>  
-#include <stdlib.h>  
-#include <io.h> 
-#include <time.h>  
-#include <string.h>
 #include "..\Console.cpp"
-#include "Sorts.cpp"
+#include "..\Sorts.cpp"
 
 #define lim 5000
 
-
-void outputFiles(struct File files[], int n, double timeSpent)
+void outputFiles(struct File *files, int n, double timeSpent)
 {
 	textattr(LIGHTGRAY);
 	clrscr();
@@ -35,7 +29,7 @@ void enterPath(void)
 	struct File file;
 	intptr_t hFile;
 	char path[200];
-	int count = 0;
+	long count = 0;
 	printf("Enter path: ");
 	gets_s(path);
 	strcat(path, "*.*");
@@ -53,7 +47,7 @@ void enterPath(void)
 		} while (_findnext(hFile, &file.file) == 0);
 		_findclose(hFile);
 	}
-	Button button1[] = {
+	Button sortButton[] = {
 		{"Bubble sort", false},
 		{"Sort by selection", false},
 		{"Insert sort", false},
@@ -63,22 +57,22 @@ void enterPath(void)
 		{"Sort by counting", false},
 		{"Exit", false}
 	};
-	int n1 = sizeof(button1) / sizeof(*button1);
+	int sortN = sizeof(sortButton) / sizeof(*sortButton);
 	clrscr();
-	int id1 = clickListener(button1, n1);
-	if (id1 == 7) exit(NULL);
+	int sortId = clickListener(sortButton, sortN);
+	if (sortId == 7) exit(NULL);
 
 	textattr(LIGHTGRAY);
 	clrscr();
-	Button button2[] = {
+	Button orderButton[] = {
 		{"Ascending", false},
 		{"Descending", false}
 	};
-	int n2 = sizeof(button2) / sizeof(*button2);
-	int id2 = clickListener(button2, n2);
+	int orderN = sizeof(orderButton) / sizeof(*orderButton);
+	int orderId = clickListener(orderButton, orderN);
 
 	clock_t begin = clock();
-	switch (id1)
+	switch (sortId)
 	{
 	case 0:
 		shakerSort(files, count);
@@ -104,7 +98,7 @@ void enterPath(void)
 	default:
 		break;
 	}
-	if (id2) reverse(files, count);
+	if (orderId) reverse(files, count);
 	clock_t end = clock();
 	double timeSpent = (double)(end - begin) / CLOCKS_PER_SEC;
 	outputFiles(files, count, timeSpent);
