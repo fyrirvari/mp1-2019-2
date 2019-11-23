@@ -121,7 +121,7 @@ void quickSort(struct File *files, long n)
 		}
 	} while (i <= j);
 
-	if (j > 0) quickSort(files, j);
+	if (j > 0) quickSort(files, j + 1);
 	if (n > i) quickSort(files + i, n - i);
 }
 
