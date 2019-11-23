@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "..\Console.cpp"
-#include "..\Sorts.cpp"
+#include "Sorts.cpp"
 
 #define lim 5000
 
