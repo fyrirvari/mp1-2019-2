@@ -15,7 +15,7 @@ void outputFiles(struct File *files, int n, double timeSpent)
 	{
 		printf("%-32.32s %.24s  %10lu\n", files[i].file.name, files[i].buffer, files[i].file.size);
 	}
-	printf("\nTime spent: %.3lf sec\n", timeSpent);
+	printf("\nTime spent: %lf sec\n%d\n", timeSpent, n);
 	system("pause");
 }
 

@@ -10,7 +10,7 @@ enum TColor {BLACK, BLUE, GREEN, CYAN, RED, MAGENTA, BROWN, LIGHTGRAY,
 
 int window_width = 130;
 int window_height = 50;
-const int titleLength = 30;
+const int titleLength = 45;
 const int COUNT = 16 * 16;
 SMALL_RECT window;
 COORD buf;
