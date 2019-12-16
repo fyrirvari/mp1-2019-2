@@ -52,14 +52,24 @@ ld (*selectFunc())(ld x, ld e, int& n, ld& reference)
 		{"cos(x)", false},
 		{"exp(x)", false},
 		{"arcsin(x) |x|<1", false},
-		{"arctg(x) |x|<=1", false}
+		{"arctg(x) |x|<=1", false},
+		{"ln(1+x) -1<x<=1", false},
+		{"arccos(x) |x|<1", false},
+		{"tg(x) |x|<PI/2", false},
+		{"ctg(x) |x|<PI", false},
+		{"arcctg(x) |x|<=1", false}
 	};
 	ld(*func[])(ld x, ld e, int& n, ld& reference) = {
 		mySin,
 		myCos,
 		myExp,
 		myAsin,
-		myAtan
+		myAtan,
+		myLog,
+		myAcos,
+		myTan,
+		myCot,
+		myAcot
 	};
 	clrscr();
 	int id = clickListener(funcButton, sizeof(funcButton) / sizeof(*funcButton));
@@ -121,8 +131,8 @@ int main(void)
 {
 	setlocale(LC_ALL, "Rus");
 	Button resButton[] = {
-		{"Да", false},
-		{"Нет", false}
+		{"Посчитать еще раз", false},
+		{"Выход", false}
 	};
 	setFull();
 	GetWindow(&window, &buf);

@@ -95,3 +95,58 @@ ld myAtan(ld x, ld e, int& n, ld& reference)
 }
 
 //------------------------------------------------------------------------
+ld myLog(ld x, ld e, int& n, ld& reference)
+{
+	int i;
+	ld res = x, up = x;
+	reference = log(1 + x);
+	for (i = 2; fabs(res - reference) > e && i < n; i ++)
+	{
+		up *= (-1) * x;
+		res += up / i;
+	}
+	n = (n < i ? n : i);
+	return res;
+}
+
+//------------------------------------------------------------------------
+ld myAcos(ld x, ld e, int& n, ld& reference)
+{
+	int i = n - 1;
+	ld res = PI / 2 - myAsin(x, e, i, reference);
+	reference = acos(x);
+	n = (n < i ? n : i);
+	return res;
+}
+
+//------------------------------------------------------------------------
+ld myTan(ld x, ld e, int& n, ld& reference)
+{
+	int i = n;
+	ld res = mySin(x, e, n, reference);
+	n = (n < i ? n : i);
+	res /= myCos(x, e, n, reference);
+	reference = tan(x);
+	return res;
+}
+
+//------------------------------------------------------------------------
+ld myCot(ld x, ld e, int& n, ld& reference)
+{
+	int i = n;
+	ld res = myCos(x, e, n, reference);
+	n = (n < i ? n : i);
+	res /= mySin(x, e, n, reference);
+	reference = 1 / tan(x);
+	return res;
+}
+
+//------------------------------------------------------------------------
+ld myAcot(ld x, ld e, int& n, ld& reference)
+{
+	int i = n - 1;
+	ld res = PI / 2 - myAtan(x, e, i, reference);
+	reference = PI / 2 - atan(x);
+	n = (n < i ? n : i);
+	return res;
+}
